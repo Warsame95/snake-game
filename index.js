@@ -11,6 +11,8 @@ var score = 0;
 
 var displayScore;
 
+// Moving the snake
+
 document.addEventListener('keydown', press);
 
 function press(e){
@@ -42,16 +44,16 @@ function press(e){
 
  function movement(){
     if (up){
-        snake.y -= 1;
+        snake.y -= 5;
     }
     if (right){
-        snake.x += 1;
+        snake.x += 5;
     }
     if (down){
-        snake.y += 1;
+        snake.y += 5;
     }
     if (left){
-        snake.x -= 1;
+        snake.x -= 5;
     }
 } 
 
@@ -88,6 +90,20 @@ function startGame() {
           ctx.canvas.getContext("2d");
           ctx.fillStyle = color;
           ctx.fillRect(this.x,this.y, this.width, this.height);
+
+          // if the snake touches the boundaries of the canvas
+          if (this.x > canvas.width){
+            this.x = 0;
+          }
+          if (this.x < 0){
+            this.x = canvas.width;
+          }
+          if (this.y > canvas.height){
+            this.y = 0;
+          }
+          if(this.y < 0){
+            this.y = canvas.height;
+          }
       }
 
       this.crashWith = function(otherobj) {
