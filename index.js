@@ -2,6 +2,10 @@ var snake;
 var snakeBody = 3;
 var food;
 var canvas;
+const scale = 10;
+var row;
+var column;
+
 var up = false,
     down = false,
     left = false,
@@ -44,31 +48,33 @@ function press(e){
 
  function movement(){
     if (up){
-        snake.y -= 5;
+        snake.y -= scale;
     }
     if (right){
-        snake.x += 5;
+        snake.x += scale;
     }
     if (down){
-        snake.y += 5;
+        snake.y += scale;
     }
     if (left){
-        snake.x -= 5;
+        snake.x -= scale;
     }
 } 
 
 function startGame() {
     canvas = document.getElementById("canvas");
+    row = canvas.height/scale;
+    column = canvas.width/scale;
     displayScore = document.getElementById("scorekeeper");
     snake = new compenent(10, 10, "green", 145, 60);
-    food = new compenent(10,10, "red", Math.floor(Math.random() * 291), Math.floor(Math.random() * 120));
+    food = new compenent(10,10, "red", (Math.floor(Math.random() * row-1)+1)*scale, (Math.floor(Math.random() * column-1)+1)*scale);
     GameArea.refresh();
     
   }
 
   var GameArea = {
       refresh : function(){
-          this.interval = setInterval(updateGameArea, 20);
+          this.interval = setInterval(updateGameArea, 150);
       },
       clear : function(){
           canvas.getContext("2d").clearRect(0,0,700,400);
@@ -132,8 +138,8 @@ function startGame() {
       GameArea.clear();
       movement();
       if (snake.crashWith(food)) {
-        food.x = Math.floor(Math.random() * 291)
-        food.y = Math.floor(Math.random() * 120)
+        food.x = (Math.floor(Math.random() * row-1)+1)*scale
+        food.y = (Math.floor(Math.random() * column-1)+1)*scale
         score++;
       }
       displayScore.innerHTML = "Score: " + score;
