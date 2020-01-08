@@ -1,7 +1,10 @@
 var snake;
 var snakeBody = 3;
 var food;
-var canvas;
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
 const scale = 10;
 var row;
 var column;
@@ -62,11 +65,10 @@ function press(e){
 } 
 
 function startGame() {
-    canvas = document.getElementById("canvas");
     row = canvas.height/scale;
     column = canvas.width/scale;
     displayScore = document.getElementById("scorekeeper");
-    snake = new compenent(10, 10, "green", 145, 60);
+    snake = new compenent(10, 10, "green", 140, 60);
     food = new compenent(10,10, "red", (Math.floor(Math.random() * row-1)+1)*scale, (Math.floor(Math.random() * column-1)+1)*scale);
     GameArea.refresh();
     
@@ -88,12 +90,12 @@ function startGame() {
       this.height = height;
       this.x = x;
       this.y = y;
-      ctx = canvas.getContext("2d");
+      //ctx = canvas.getContext("2d");
       ctx.fillStyle = color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
 
       this.update = function(){
-          ctx.canvas.getContext("2d");
+          //ctx.canvas.getContext("2d");
           ctx.fillStyle = color;
           ctx.fillRect(this.x,this.y, this.width, this.height);
 
@@ -146,5 +148,3 @@ function startGame() {
       food.update();
       snake.update();
   }
-
-
