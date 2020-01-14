@@ -68,8 +68,8 @@ function startGame() {
     row = canvas.height/scale;
     column = canvas.width/scale;
     displayScore = document.getElementById("scorekeeper");
-    snake = new compenent(10, 10, "green", 140, 60);
-    food = new compenent(10,10, "red", (Math.floor(Math.random() * row-1)+1)*scale, (Math.floor(Math.random() * column-1)+1)*scale);
+    snake = new Snake(10, 10, "green", 140, 60);
+    food = new Food(10,10, "red", (Math.floor(Math.random() * row-1)+1)*scale, (Math.floor(Math.random() * column-1)+1)*scale);
     GameArea.refresh();
     
   }
@@ -90,12 +90,10 @@ function startGame() {
       this.height = height;
       this.x = x;
       this.y = y;
-      //ctx = canvas.getContext("2d");
       ctx.fillStyle = color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
 
       this.update = function(){
-          //ctx.canvas.getContext("2d");
           ctx.fillStyle = color;
           ctx.fillRect(this.x,this.y, this.width, this.height);
 
@@ -139,10 +137,8 @@ function startGame() {
   function updateGameArea(){
       GameArea.clear();
       movement();
-      if (snake.crashWith(food)) {
-        food.x = (Math.floor(Math.random() * row-1)+1)*scale
-        food.y = (Math.floor(Math.random() * column-1)+1)*scale
-        score++;
+      if (snake.consume(food)){
+        food.locationchange();
       }
       displayScore.innerHTML = "Score: " + score;
       food.update();
