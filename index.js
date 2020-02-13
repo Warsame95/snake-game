@@ -23,25 +23,25 @@ var displayScore;
 document.addEventListener('keydown', press);
 
 function press(e){
-    if (e.keyCode === 38 /* up */){
+    if (e.keyCode === 38 && down == false /* up */){
         up = true
         down = false
         right = false
         left = false
       }
-      if (e.keyCode === 39 /* right */ ){
+      if (e.keyCode === 39 && left == false/* right */ ){
         right = true
         down = false
         up = false
         left = false
       }
-      if (e.keyCode === 40 /* down */ ){
+      if (e.keyCode === 40 && up == false /* down */ ){
         down = true
         up = false
         right = false
         left = false
       }
-      if (e.keyCode === 37 /* left */ ){
+      if (e.keyCode === 37 && right == false /* left */ ){
         left = true
         down = false
         right = false
